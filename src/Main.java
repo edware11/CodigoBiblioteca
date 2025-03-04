@@ -96,3 +96,55 @@ class Libro {
         }
     }
 }
+
+// Clase principal con el menú de usuario
+ class GestionBiblioteca {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Biblioteca biblioteca = new Biblioteca();
+
+        while (true) {
+            System.out.println("\nGestión de Biblioteca");
+            System.out.println("1. Agregar libro");
+            System.out.println("2. Buscar libro por título");
+            System.out.println("3. Buscar libro por autor");
+            System.out.println("4. Listar todos los libros");
+            System.out.println("5. Salir");
+            System.out.print("Seleccione una opción: ");
+
+            try {
+                int opcion = Integer.parseInt(scanner.nextLine());
+                switch (opcion) {
+                    case 1:
+                        System.out.print("Ingrese título: ");
+                        String titulo = scanner.nextLine();
+                        System.out.print("Ingrese autor: ");
+                        String autor = scanner.nextLine();
+                        System.out.print("Ingrese ISBN: ");
+                        String isbn = scanner.nextLine();
+                        biblioteca.agregarLibro(new Libro(titulo, autor, isbn));
+                        break;
+                    case 2:
+                        System.out.print("Ingrese título del libro: ");
+                        biblioteca.buscarPorTitulo(scanner.nextLine());
+                        break;
+                    case 3:
+                        System.out.print("Ingrese autor del libro: ");
+                        biblioteca.buscarPorAutor(scanner.nextLine());
+                        break;
+                    case 4:
+                        biblioteca.listarLibros();
+                        break;
+                    case 5:
+                        System.out.println("Saliendo del sistema.");
+                        scanner.close();
+                        return;
+                    default:
+                        System.out.println("Opción inválida. Intente nuevamente.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+}
